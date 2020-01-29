@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Search Word,Yes?</h1>
+    <form>
+        <input name ="word" type="text" id="wordd" placeholder="cat">
+        <button id="nappi" type="button" >search</button>
+
+    </form>
+    <ul id="ulostulo">
+    
+
+    </ul>
+    <ul id="ulostulo2">
+
+    </ul>
+
+  <script>
+      
+      document.getElementById('nappi').onclick = () => {
+        const sana = document.getElementById('wordd').value
+        fetch(`http://localhost:3000/api/users/${sana}`)
+        .then(response => response.json())
+            .then(data => {
+               
+
+                for(let item of data){
+                
+                const uusli = document.createElement('li');
+                const teksti = document.createTextNode(`Word:${item.word}, Pronounciation: ${item.phonetic},
+                Origin: ${item.origin}`);
+
+                /*itemMeaning= item.meaning;
+                for(let itemz of itemMeaning){
+                    let teksti1= document.createTextNode(`meaning: ${itemz.noun}`)
+                    ulostulo2.appendChild(uusli);
+                uusli.appendChild(teksti1);*/
+
+                //}
+                ulostulo.appendChild(uusli);
+                uusli.appendChild(teksti);
+
+                console.log("Data", data)
+
+                //}
+            }})
+    }
+  </script>
+
+    
+</body>
+</html>
